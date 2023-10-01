@@ -39,5 +39,5 @@ func (p *PlayerServer) showScores(w http.ResponseWriter, player string) {
 		w.WriteHeader(http.StatusNotFound)
 	}
 
-	fmt.Fprint(w, score)
+	_, _ = fmt.Fprint(w, score)
 }
