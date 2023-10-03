@@ -28,7 +28,7 @@ func main() {
 	if err != nil {
 		log.Fatal("error connecting to database", err)
 	}
-	server := &PlayerServer{store}
+	server := NewPlayerServer(store)
 	port := "5000"
 	log.Printf("Server starting on %s", port)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), server))

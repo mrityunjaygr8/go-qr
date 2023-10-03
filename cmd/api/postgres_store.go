@@ -47,6 +47,31 @@ type PostgresStore struct {
 	DB *sql.DB
 }
 
+func (p *PostgresStore) GetLeague() []Player {
+	res, err := p.DB.Query(fmt.Sprint(`SELECT Name, Score FROM Scores`))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer res.Close()
+
+	var league []Player
+	for res.Next() {
+		var (
+			name  string
+			score int
+		)
+
+		if err := res.Scan(&name, &score); err != nil {
+			log.Fatal(err)
+		}
+
+		league = append(league, Player{name, score})
+	}
+
+	return league
+}
+
 func (p *PostgresStore) GetPlayerScore(playerName string) int {
 	res, err := p.DB.Query(fmt.Sprintf(`SELECT Name, Score FROM Scores WHERE name = '%s'`, playerName))
 	if err != nil {

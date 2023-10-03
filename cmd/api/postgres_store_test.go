@@ -22,7 +22,7 @@ func TestPostgresStore(t *testing.T) {
 
 func TestPostgresStore_GetPlayerScore(t *testing.T) {
 	store := &PostgresStore{DB: db}
-	server := PlayerServer{store: store}
+	server := NewPlayerServer(store)
 
 	t.Run("get score of player in store", func(t *testing.T) {
 		player := "Pepper"
@@ -50,7 +50,7 @@ func TestPostgresStore_GetPlayerScore(t *testing.T) {
 
 func TestPostgresStore_RecordWin(t *testing.T) {
 	store := &PostgresStore{DB: db}
-	server := PlayerServer{store: store}
+	server := NewPlayerServer(store)
 
 	t.Run("returns accepted on POST with not present user", func(t *testing.T) {
 		player := "Delta"
