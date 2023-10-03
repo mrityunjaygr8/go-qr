@@ -30,10 +30,10 @@ DROP TABLE Scores;
 `
 
 func run(m *testing.M) (code int, err error) {
-	dbConfig := DB_Config{
+	dbConfig := DbConfig{
 		Host:     "localhost",
 		Password: "postgres",
-		Port:     15432,
+		Port:     "15432",
 		Name:     "postgres",
 		Username: "postgres",
 	}

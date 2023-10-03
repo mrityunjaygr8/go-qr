@@ -10,27 +10,27 @@ import (
 
 var ErrPostgresConfigInvalid = errors.New("the provided postgres config is invalid")
 
-type DB_Config struct {
+type DbConfig struct {
 	Host     string
 	Password string
-	Port     int
+	Port     string
 	Name     string
 	Username string
 }
 
-func (d DB_Config) getDBString() string {
-	return fmt.Sprintf("postgres://%s:%s@%s:%d/%s?sslmode=disable", d.Username, d.Password, d.Host, d.Port, d.Name)
+func (d DbConfig) getDBString() string {
+	return fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=disable", d.Username, d.Password, d.Host, d.Port, d.Name)
 }
 
-func (d DB_Config) validate() error {
-	if d.Port == 0 || d.Host == "" {
+func (d DbConfig) validate() error {
+	if d.Port == "" || d.Host == "" {
 		return ErrPostgresConfigInvalid
 	}
 
 	return nil
 }
 
-func NewPostgresStore(dbConfig DB_Config) (*PostgresStore, error) {
+func NewPostgresStore(dbConfig DbConfig) (*PostgresStore, error) {
 	err := dbConfig.validate()
 	if err != nil {
 		return nil, err

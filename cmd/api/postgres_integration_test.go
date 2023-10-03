@@ -8,10 +8,10 @@ import (
 )
 
 func TestPostgresRecordingWinsAndRetrievingThem(t *testing.T) {
-	config := DB_Config{
+	config := DbConfig{
 		Host:     "localhost",
 		Password: "postgres",
-		Port:     15432,
+		Port:     "15432",
 		Name:     "postgres",
 		Username: "postgres",
 	}
