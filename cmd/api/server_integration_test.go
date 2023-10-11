@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"net/http"
 	"net/http/httptest"
@@ -9,7 +10,10 @@ import (
 )
 
 func TestRecordingWinsAndRetrievingThem(t *testing.T) {
-	store := NewInMemoryPlayerStore()
+	database, cleanDatabase := createTempFile(t, "[]")
+	defer cleanDatabase()
+	store, err := NewFileSystemPlayerStore(database)
+	assert.Nil(t, err)
 	server := NewPlayerServer(store)
 
 	player := "Pepper"

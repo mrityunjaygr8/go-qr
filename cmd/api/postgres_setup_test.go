@@ -4,17 +4,16 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
-	"os"
 	"testing"
 )
 
-func TestMain(m *testing.M) {
-	code, err := run(m)
-	if err != nil {
-		fmt.Println(err)
-	}
-	os.Exit(code)
-}
+//func TestMain(m *testing.M) {
+//	code, err := run(m)
+//	if err != nil {
+//		fmt.Println(err)
+//	}
+//	os.Exit(code)
+//}
 
 var db *sql.DB
 

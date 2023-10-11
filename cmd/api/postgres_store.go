@@ -47,7 +47,7 @@ type PostgresStore struct {
 	DB *sql.DB
 }
 
-func (p *PostgresStore) GetLeague() []Player {
+func (p *PostgresStore) GetLeague() League {
 	res, err := p.DB.Query(fmt.Sprint(`SELECT Name, Score FROM Scores`))
 	if err != nil {
 		log.Fatal(err)
